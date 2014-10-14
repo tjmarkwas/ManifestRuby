@@ -7,9 +7,11 @@ def open_manifestcorp
   @browser.goto "manifestcorp.com"
 end
 
-def open_news
-  @browser.link(text: "NEWS").click
+def open_opportunities
+  @browser.link(text: "OPPORTUNITIES").click
 end
+
+
 
 def generate_some_news
   # code here
@@ -39,7 +41,6 @@ end
 
 When(/^I search for jobs by state$/) do
   open_browser
-
 
 
   open_manifestcorp
