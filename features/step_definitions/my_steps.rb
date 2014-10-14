@@ -1,19 +1,30 @@
 require 'watir-webdriver'
-def open_browser
-  @browser=Watir::Browser.new :firefox
-end
 
 def open_manifestcorp
   @browser.goto "manifestcorp.com"
+end
+
+def open_news
+  @browser.link(text: "NEWS").click
 end
 
 def open_opportunities
   @browser.link(text: "OPPORTUNITIES").click
 end
 
+def select_state
+  @browser.select_list(name: "state").select "Ohio"
+end
 
+def run_search
+  @browser.button(name: "submitButton").click
+end
 
 def generate_some_news
+  # code here
+end
+
+def generate_job_postings
   # code here
 end
 
@@ -23,12 +34,14 @@ Given(/^there is some news$/) do
 end
 
 When(/^I select the news$/) do
-  open_browser
+  #open_browser
   open_manifestcorp
   open_news
 end
 
 Then(/^the News is present for reading$/) do
+  #sleep 5
+
   there_is_something
   there_are_dates
   there_are_titles
@@ -40,9 +53,7 @@ Given(/^there are some job postings$/) do
 end
 
 When(/^I search for jobs by state$/) do
-  open_browser
-
-
+  #open_browser
   open_manifestcorp
   open_opportunities
   select_state
