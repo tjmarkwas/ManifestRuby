@@ -1,5 +1,6 @@
 require 'watir-webdriver'
 require 'page-object'
+require 'rspec'
 include PageObject::PageFactory
 
 def open_manifestcorp
@@ -8,6 +9,12 @@ end
 
 def open_news
   on(ManifestMain).news
+end
+
+def there_are_unique_dates(news)
+  count= news.keys.size
+  unique_count= news.keys.uniq.size
+  expect(unique_count).to eq count
 end
 
 def open_opportunities
@@ -43,8 +50,8 @@ end
 
 Then(/^the News is present for reading$/) do
   the_news= on(ManifestNews).all_news
-  there_are_dates
-  there_are_titles
+  there_are_unique_dates(the_news)
+  there_are_unique_titles
 end
 
 
