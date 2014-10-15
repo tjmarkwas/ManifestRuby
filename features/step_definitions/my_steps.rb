@@ -43,6 +43,12 @@ def generate_job_postings
   # code here
 end
 
+def the_jobs_listed_are_located_in_ohio(opportunities)
+  expect(opportunities.size).to be > 0
+  opportunities.each do |opportunity|
+    expect(opportunity[:location]).to match /(OH|Ohio)/
+  end
+end
 Given(/^there is some news$/) do
   generate_some_news
 
@@ -75,9 +81,5 @@ end
 
 Then(/^the jobs in that state will be listed$/) do
   the_opportunities= on(ManifestOpps).all_opportunities
-  there_is_search_criteria
-  there_are_job_titles
-  there_are_locations
-  there_is_category
-  there_is_type
+  the_jobs_listed_are_located_in_ohio(the_opportunities)
 end
