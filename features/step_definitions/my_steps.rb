@@ -17,6 +17,12 @@ def there_are_unique_dates(news)
   expect(unique_count).to eq count
 end
 
+def there_are_unique_titles(news)
+  count= news.values.size
+  unique_count= news.values.uniq.size
+  expect(unique_count).to eq count
+end
+
 def open_opportunities
   on(ManifestMain).opportunities
 end
@@ -51,7 +57,7 @@ end
 Then(/^the News is present for reading$/) do
   the_news= on(ManifestNews).all_news
   there_are_unique_dates(the_news)
-  there_are_unique_titles
+  there_are_unique_titles(the_news)
 end
 
 
