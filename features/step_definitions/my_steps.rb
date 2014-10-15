@@ -61,7 +61,7 @@ When(/^I search for jobs by state$/) do
 end
 
 Then(/^the jobs in that state will be listed$/) do
-  there_is_something
+  the_opportunities= on(ManifestOpps).all_opportunities
   there_is_search_criteria
   there_are_job_titles
   there_are_locations
