@@ -1,23 +1,25 @@
 require 'watir-webdriver'
+require 'page-object'
+include PageObject::PageFactory
 
 def open_manifestcorp
-  @browser.goto "manifestcorp.com"
+  visit ManifestMain
 end
 
 def open_news
-  @browser.link(text: "NEWS").click
+  on(ManifestMain).news
 end
 
 def open_opportunities
-  @browser.link(text: "OPPORTUNITIES").click
+  on(ManifestMain).opportunities
 end
 
 def select_state
-  @browser.select_list(name: "state").select "Ohio"
+  on(ManifestOpps).state= 'Ohio'
 end
 
 def run_search
-  @browser.button(name: "submitButton").click
+  on(ManifestOpps).search
 end
 
 def generate_some_news
@@ -40,9 +42,7 @@ When(/^I select the news$/) do
 end
 
 Then(/^the News is present for reading$/) do
-  #sleep 5
-
-  there_is_something
+  the_news= on(ManifestNews).all_news
   there_are_dates
   there_are_titles
 end
